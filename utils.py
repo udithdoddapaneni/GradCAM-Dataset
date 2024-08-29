@@ -1,7 +1,7 @@
 import torch 
 from torch.utils.data import Dataset
 
-import cv2
+from PIL import Image
 import numpy as np 
 import matplotlib.pyplot as plt 
 
@@ -39,8 +39,7 @@ class ImageDataset(Dataset):
         row = self.df.iloc[idx]
 
         img_path = self.data_dir + row.img_path
-        img = cv2.imread(img_path)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = np.array(Image.open(img_path))
 
         label = row.label 
 
